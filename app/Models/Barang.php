@@ -58,11 +58,10 @@ class Barang extends Model
                     'barangs.created_at',
                     'barangs.updated_at',
                     'barangs.deleted_at',
-
-
                     )
-                ->get();
+                    ;
 
         
     }
+
 }

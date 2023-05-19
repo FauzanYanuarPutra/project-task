@@ -26,7 +26,7 @@ class BarangController extends Controller
 
 
         return Inertia::render('Barang/Index', [
-            'barangs' => $this->Barang->allData()->whereNull('deleted_at'),
+            'barangs' => $this->Barang->allData()->whereNull('barangs.deleted_at')->paginate(10),
             'status' => 'restore'
             // 'suppliers' => $suppliers
         ]);
@@ -146,7 +146,7 @@ class BarangController extends Controller
     public function indexRestore()
     {
         return Inertia::render('Barang/Index', [
-            'barangs' => $this->Barang->allData()->where('deleted_at'),
+            'barangs' => $this->Barang->allData()->whereNot('barangs.deleted_at')->paginate(10),
             'status' => 'back'
         ]);
 

@@ -14,7 +14,7 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        $suppliers = Supplier::all();
+        $suppliers = Supplier::paginate(10);
 
 
         return Inertia::render('Supplier/Index', [
@@ -123,7 +123,7 @@ class SupplierController extends Controller
 
     public function indexRestore()
     {
-        $suppliers = Supplier::onlyTrashed()->get();
+        $suppliers = Supplier::onlyTrashed()->paginate(10);
 
         return Inertia::render(
             'Supplier/Index',

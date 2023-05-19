@@ -85,23 +85,23 @@
                         <div class="overflow-y-auto block w-full">
                             <table class="w-full">
                                 <thead class="font-bold ">
-                                    <td class="px-4 overflow-hidden whitespace-nowrap  border-2 py-2">No</td>
+                                    <td class="px-4 text-center overflow-hidden whitespace-nowrap  border-2 py-2">No</td>
                                     <td class="px-4 overflow-hidden whitespace-nowrap  border-2  py-2">Nama Barang</td>
-                                    <td class="px-4 overflow-hidden whitespace-nowrap  border-2 py-2">Stock</td>
-                                    <td class="px-4 overflow-hidden whitespace-nowrap  border-2 py-2">Harga</td>
+                                    <td class="px-4 overflow-hidden whitespace-nowrap  border-2 py-2 text-end">Stock</td>
+                                    <td class="px-4 overflow-hidden whitespace-nowrap  border-2 py-2 text-end">Harga</td>
                                     <td class="px-4 overflow-hidden whitespace-nowrap  border-2 py-2">Nama Supplier</td>
                                     <td class="px-4 overflow-hidden whitespace-nowrap  border-2 py-2">Alamat Supplier</td>
-                                    <td class="px-4 overflow-hidden whitespace-nowrap  border-2 py-2">No Telp Supplier</td>
+                                    <td class="px-4 overflow-hidden whitespace-nowrap  border-2 py-2 text-end">No Telp Supplier</td>
                                     <td class="px-4 overflow-hidden whitespace-nowrap border-2 py-2 text-center">Aksi</td>
                                 </thead>
                                 <tbody class="">
-                                    <tr v-for="(barang, index) in barangs" :key="barang.id">
-                                        <td class="px-4 border-2 py-2">{{ index + 1}}</td>
+                                    <tr v-for="(barang, index) in barangs.data" :key="barang.id">
+                                        <td class="px-4 border-2 py-2 text-center">{{    + 1 + parseInt(index) }}</td>
                                         <td class="px-4 border-2 py-2">{{ barang.nama_barang }}</td>
-                                        <td class="px-4 border-2 py-2">
+                                        <td class="px-4 border-2 py-2 text-end">
                                             {{ barang.stok_barang }}
                                         </td>
-                                        <td class="px-4 border-2 py-2">
+                                        <td class="px-4 border-2 py-2 text-end">
                                             {{ barang.harga_barang }}
                                         </td>
                                         <td class="px-4 border-2 py-2">
@@ -110,7 +110,7 @@
                                         <td class="px-4 border-2 py-2">
                                             {{ barang.alamat_supplier }}
                                         </td>
-                                        <td class="px-4 border-2 py-2">
+                                        <td class="px-4 border-2 py-2 text-end">
                                             {{ barang.telp_supplier }}
                                         </td>
                     
@@ -154,7 +154,9 @@
                             </table>
                         </div>
                         
+                        <pagination-table :pagination="barangs" @pagination-change-page="fetchData"></pagination-table>
                         <!-- <pagination :links="barangs.links" /> -->
+                        
                     </div>
                 </div>
             </div>
@@ -168,6 +170,7 @@ import BreezeAuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import BreezeNavLink from "@/Components/NavLink.vue";
 import { Head } from "@inertiajs/vue3";
 import { Link } from "@inertiajs/vue3";
+import PaginationTable from '@/Components/PaginationTable.vue';
 
 export default {
     components: {
@@ -175,12 +178,22 @@ export default {
         Head,
         BreezeNavLink,
         Link,
+        PaginationTable
     },
     props: {
       barangs: Object,
       status: Object
     },
     methods: {
+        fetchData(page) {
+            this.$inertia.get(`/barangs?page=${page}`)
+                // .then(response => {
+                //     // Handle the response and update the data in your component
+                // })
+                // .catch(error => {
+                //     // Handle any errors
+                // });
+        },
         destroy(id) {
             this.$inertia.delete(route("barangs.destroy", id), {
                 onBefore: () => confirm('Apakah anda yakin akan menghapus barang?'),

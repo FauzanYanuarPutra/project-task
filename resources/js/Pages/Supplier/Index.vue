@@ -86,25 +86,25 @@
                         <div class="overflow-y-auto block w-full">
                             <table class=" w-full ">
                                 <thead class="font-bold ">
-                                    <td class="px-4 overflow-hidden whitespace-nowrap  border-2 py-2">No</td>
+                                    <td class="px-4 overflow-hidden whitespace-nowrap  border-2 py-2 text-center">No</td>
                                     <td class="px-4 overflow-hidden whitespace-nowrap  border-2  py-2">Nama supplier</td>
                                     <td class="px-4 overflow-hidden whitespace-nowrap  border-2 py-2">Alamat</td>
-                                    <td class="px-4 overflow-hidden whitespace-nowrap  border-2 py-2">No Telp</td>
+                                    <td class="px-4 overflow-hidden whitespace-nowrap  border-2 py-2 text-end">No Telp</td>
 
 
                                     <td class="px-4 border-2 py-2 text-center">Aksi</td>
                                 </thead>
                                 <tbody class="">
-                                    <tr v-for="(supplier, index) in suppliers" :key="supplier.id">
+                                    <tr v-for="(supplier, index) in suppliers.data" :key="supplier.id">
                                         <!-- <td class="px-4 border-2 py-2">{{ supplier.id }}</td> -->
-                                    <td class="px-4 border-2 py-2">{{ index + 1}}</td>
+                                    <td class="px-4 border-2 py-2 text-center">{{ index + 1}}</td>
 
                                         <td class="px-4 border-2 py-2">{{ supplier.nama_supplier }}</td>
                                         <td class="px-4 border-2 py-2">
                                             {{ supplier.alamat_supplier }}
                                         </td>
                                     
-                                        <td class="px-4 border-2 py-2">
+                                        <td class="px-4 border-2 py-2 text-end">
                                             {{ supplier.telp_supplier }}
                                         </td>
                                         <td class="border-2  font-[500]">
@@ -147,6 +147,8 @@
                             </table>
                         </div>
                         
+                        <pagination-table :pagination="suppliers" @pagination-change-page="fetchData"></pagination-table>
+
                         <!-- <pagination :links="suppliers.links" /> -->
                     </div>
                 </div>
@@ -161,6 +163,8 @@ import BreezeAuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import BreezeNavLink from "@/Components/NavLink.vue";
 import { Head } from "@inertiajs/vue3";
 import { Link } from "@inertiajs/vue3";
+import PaginationTable from '@/Components/PaginationTable.vue';
+
 
 export default {
     components: {
@@ -168,12 +172,23 @@ export default {
         Head,
         BreezeNavLink,
         Link,
+        PaginationTable
+
     },
     props: {
       suppliers: Object,
       status: Object
     },
     methods: {
+        fetchData(page) {
+            this.$inertia.get(`/suppliers?page=${page}`)
+                // .then(response => {
+                //     // Handle the response and update the data in your component
+                // })
+                // .catch(error => {
+                //     // Handle any errors
+                // });
+        },
         destroy(id) {
             this.$inertia.delete(route("suppliers.destroy", id), {
                 onBefore: () => confirm('Apakah anda yakin akan menghapus supplier?'),
