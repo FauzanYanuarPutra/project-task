@@ -71,6 +71,7 @@
                                         lg:w-[80%]">
                                     <input
                                     type="text"
+                                    v-on:input="form.telp_supplier = form.telp_supplier.replace(/[^0-9]/g, '')"
                                     placeholder="Masukan No Telp Supplier"
                                     v-model="form.telp_supplier"
                                     class="

@@ -45,6 +45,7 @@
                                         lg:w-[80%]">
                                     <input
                                     type="text"
+                                    v-on:input="formatCurrency"
                                     placeholder="Masukan Harga Barang"
                                     v-model="form.harga_barang"
                                     class="
@@ -71,6 +72,7 @@
                                         lg:w-[80%]">
                                     <input
                                     type="text"
+                                    v-on:input="form.stok_barang = form.stok_barang.replace(/[^0-9]/g, '')"
                                     placeholder="Masukan Jumlah Stok Barang"
                                     v-model="form.stok_barang"
                                     class="
@@ -198,6 +200,11 @@ export default {
         errors: Object
     },
     methods: {
+        formatCurrency() {
+            const value = this.form.harga_barang.replace(/\D/g, ''); // Menghapus karakter non-digit
+            const formattedValue = value.replace(/\B(?=(\d{3})+(?!\d))/g, '.'); // Menambahkan titik sebagai pemisah ribuan
+            this.form.harga_barang = formattedValue;
+        },
         submit() {
             this.form.post(route("barangs.store"));
         },

@@ -34,6 +34,16 @@ defineProps({
 
                         <div class="w-[50%] h-20 secondary-background text-white flex justify-center items-center text-center font-bold"> Supplier <br>{{ suppliersCount }}</div>
                     </div>
+
+                    <!-- <div class="my-10">
+                        <h1>
+                            Nama : Muhammad Fauzan Yanuar Putra
+                        </h1>
+
+                        <h1>
+                            Telp : 082117148623
+                        </h1>
+                    </div> -->
                     
 
                 </div>
