@@ -96,8 +96,10 @@
                                 </thead>
                                 <tbody class="">
                                     <tr v-for="(supplier, index) in suppliers.data" :key="supplier.id">
+                                    <td class="px-4 border-2 py-2 text-center" ><div v-if="suppliers.current_page > 1" class="inline-block">{{  (suppliers.current_page - 1).toString() }}</div>{{    + (index + 1).toString()  }}</td>
+
                                         <!-- <td class="px-4 border-2 py-2">{{ supplier.id }}</td> -->
-                                    <td class="px-4 border-2 py-2 text-center">{{ index + 1}}</td>
+                                    <!-- <td class="px-4 border-2 py-2 text-center">{{ index + 1}}</td> -->
 
                                         <td class="px-4 border-2 py-2">{{ supplier.nama_supplier }}</td>
                                         <td class="px-4 border-2 py-2">

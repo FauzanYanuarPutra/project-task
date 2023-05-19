@@ -96,7 +96,7 @@
                                 </thead>
                                 <tbody class="">
                                     <tr v-for="(barang, index) in barangs.data" :key="barang.id">
-                                        <td class="px-4 border-2 py-2 text-center">{{    + 1 + parseInt(index) }}</td>
+                                        <td class="px-4 border-2 py-2 text-center" ><div v-if="barangs.current_page > 1" class="inline-block">{{  (barangs.current_page - 1).toString() }}</div>{{    + (index + 1).toString()  }}</td>
                                         <td class="px-4 border-2 py-2">{{ barang.nama_barang }}</td>
                                         <td class="px-4 border-2 py-2 text-end">
                                             {{ barang.stok_barang }}
@@ -153,6 +153,7 @@
                                 </tbody>
                             </table>
                         </div>
+                        
                         
                         <pagination-table :pagination="barangs" @pagination-change-page="fetchData"></pagination-table>
                         <!-- <pagination :links="barangs.links" /> -->
