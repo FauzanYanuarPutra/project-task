@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.secondary-color {
+    color: #438ACA;
+}
+
+.primary-color {
+    color: #B8DCFE;
+}
+
+.secondary-background {
+    background-color: #438ACA;
+}
+
+.primary-background {
+    background-color: #B8DCFE;
+}
+
+.hapus {
+  background-color: #DF3444;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 6px;
+
+}
+
+.ubah {
+  background-color: #FEC104;
+  color: black;
+  padding: 5px 15px;
+  border-radius: 6px;
+
+}
