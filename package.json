@@ -19,6 +19,8 @@
         "vue": "^3.2.41"
     },
     "dependencies": {
+        "gltf-loader": "^1.0.0",
+        "three": "^0.152.2",
         "vue-pagination": "^0.3.3"
     }
 }
